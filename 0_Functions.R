@@ -10,6 +10,7 @@
 ##
 ## ------------------------------------------------------------------------- ## 
 
+
 # fct_IPCW: to obtain IPCW-weighted logistic regression results
 # Parameters: 
 #   @ds_analysis_pt_level = analysis dataset (patient-level)
@@ -177,25 +178,25 @@ fct_calibration <- function(model_name, pred_var, ds_cal){
     scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.1)) +
     scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.1)) +
     geom_abline() + # 45 degree line indicating perfect calibration
-    geom_smooth(method = "lm", se = FALSE, linetype = "dashed", 
-                color = "black") + 
+    # geom_smooth(method = "lm", se = FALSE, linetype = "dashed", color = "black") + 
     # straight line fit through estimates
-    geom_smooth(aes(x = get(pred_var), y = as.numeric(outcome)), 
-                color = "red", se = FALSE, method = "loess") + 
+    geom_smooth(aes(x = get(pred_var), y = as.numeric(outcome), color = "Loess"), se = FALSE) + 
+    scale_color_manual(name = NULL, values = c("Loess" = "red"))+
     # loess fit through estimates
     xlab("") +
     ylab("Observed Probability") +
     theme_minimal() +
-    ggtitle(model_name)
+    ggtitle(model_name)+
+    theme(legend.position = c(0.95, 0.15), 
+          legend.justification = c("right", "bottom"))
   
   # The distribution plot        
   g2 <- ggplot(ds_cal, aes(x = get(pred_var))) +
-    geom_histogram(fill = "black", bins = 200) +
+    geom_histogram(fill = "black", bins = 30) +
     scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, by = 0.1)) +
     xlab("Predicted Probability") +
     ylab("") +
     theme_minimal() +
-    scale_y_continuous(breaks = c(0, 40)) +
     theme(panel.grid.minor = element_blank())
   
   # Combine them    
