@@ -4,4 +4,4 @@ This repository contains the R code for the manuscript
 
 Please cite the following manuscript if you use or adapt this code:
 
-Tay JRH et al. Residual pockets as an endpoint on periodontal disease progression in supportive periodontal care. Submitted
+Tay JRH et al. Residual pockets as an endpoint on periodontal disease progression in supportive periodontal care. Submitted (Tentative citation; please update if the manuscript becomes published and a DOI is available.)
